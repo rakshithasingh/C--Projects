@@ -1,18 +1,14 @@
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
 
-int main() {
-  FILE * file;
-
-  // Creating a file
-  file = fopen("file1.txt", "w");
-
-  // Checking whether file is 
-  // created or not
-  if (file == NULL) {
-    printf("Error in creating file");
-    return 1;
-  }
-  printf("File created.");
-
-  return 0;
+int main() 
+{
+	
+    char s[100];
+    scanf("%[^\n]%*c", &s);
+  	
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
 }
