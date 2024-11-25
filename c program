@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+  FILE * file;
+
+  // Creating a file
+  file = fopen("file1.txt", "w");
+
+  // Checking whether file is 
+  // created or not
+  if (file == NULL) {
+    printf("Error in creating file");
+    return 1;
+  }
+  printf("File created.");
+
+  return 0;
+}
