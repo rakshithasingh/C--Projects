@@ -1,0 +1,76 @@
+Algorithm
+Step 1: Declare a structure which holds data members
+Step 2: declare variables which are used for loop
+Step 3: use switch case to work on each module
+Step 4: case 1- for Adding book information
+        Case 2- for Display book information
+        Case 3- for Finding number for books in library
+        Case 4- for EXIT
+
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<string.h>
+struct library{
+   char bookname[50];
+   char author[50];
+   int noofpages;
+   float price;
+};
+int main(){
+   struct library lib[100];
+   char bookname[30];
+   int i,j, keepcount;
+   i=j=keepcount = 0;
+   while(j!=6){
+      printf("
+1. Add book information
+");
+      printf("2.Display book information
+");
+      printf("3. no of books in the library
+");
+      printf("4. Exit");
+      printf ("
+
+Enter one of the above : ");
+      scanf("%d",&j);
+      switch (j){
+         /* Add book */
+         case 1:
+            printf ("Enter book name = ");
+            scanf ("%s",lib[i].bookname);
+            printf ("Enter author name = ");
+            scanf ("%s",lib[i].author);
+            printf ("Enter pages = ");
+            scanf ("%d",&lib[i].noofpages);
+            printf ("Enter price = ");
+            scanf ("%f",&lib[i].price);
+            keepcount++;
+            i++;
+            break;
+         case 2:
+            printf("you have entered the following information
+");
+            for(i=0; i<keepcount; i++){
+               printf ("book name = %s
+",lib[i].bookname);
+               printf ("\t author name = %s
+",lib[i].author);
+               printf ("\t pages = %d
+",lib[i].noofpages);
+               printf ("\t price = %f
+",lib[i].price);
+            }
+            break;
+         case 3:
+            printf("
+ No of books in library : %d", keepcount);
+            break;
+         case 4:
+            exit (0);
+      }
+   }
+   return 0;
+}
