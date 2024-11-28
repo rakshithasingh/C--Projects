@@ -132,9 +132,9 @@ int main()
 
 		printf("\n");
 
-		printf("\t1\t  Predntl Suite\t   9,800\t09\t     %d\n",za);
+		printf("\t1\t  Premium Suite\t   9,800\t09\t     %d\n",za);
 
-		printf("\t2\t  Exctive Room\t   6,500\t11\t     %d\n",zb);
+		printf("\t2\t   Delux Room\t   6,500\t11\t     %d\n",zb);
 
 		printf("\n       -------------------------------------------------------------\n");
 
