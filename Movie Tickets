@@ -25,14 +25,14 @@ void login()
 	    i++;
 	}
 	pword[i]='\0';
-	//char code=pword;
+	char code=pword;
 	i=0;
-	//scanf("%s",&pword); 
+    scanf("%s",&pword); 
 		if(strcmp(uname,"user")==0 && strcmp(pword,"pass")==0)
 	{
 	printf("  \n\n\n       WELCOME TO OUR BOOKING SYSTEM !!!! LOGIN IS SUCCESSFUL");
 	printf("\n\n\n\t\t\t\tPress any key to continue...");
-	getch();//holds the screen
+	getch();
 	break;
 	}
 	else
@@ -40,7 +40,7 @@ void login()
 		printf("\n        SORRY !!!!  LOGIN IS UNSUCESSFUL");
 		a++;
 		
-		getch();//holds the screen
+		getch();
 		
 	}
 }
@@ -70,11 +70,11 @@ struct book
 
 int seat = 60 ;
 
-void insert_details();//for inserting movie details
-void viewAll(); // for view all data 
-void find(); // for finding data
-void book_ticket(); //for booking tickets
-void old_record(); //for view old recorrds of users,booked tickets
+void insert_details();
+void viewAll(); 
+void find();
+void book_ticket(); 
+void old_record();
 
 void main()
 {
@@ -142,11 +142,11 @@ void insert_details()
 	FILE *fp;
 	struct book b;
 	printf("Enter movie code :- ");	
-	scanf("%s",b.code);
+	scanf("%s",&b.code);
 	printf("Enter  name :- ");	
-	scanf("%s",b.name);
+	scanf("%s",&b.name);
 	printf("Enter Release Date:- ");	
-	scanf("%s",b.date);
+	scanf("%s",&b.date);
 	printf("Enetr Ticket Price:- ");	
 	scanf("%d",&b.cost);
 	
@@ -165,7 +165,7 @@ void insert_details()
 	fclose(fp);
 	system("cls");
 }
-void find() //find details
+void find() 
 {
 	struct book b;
 	FILE *fp;
@@ -188,7 +188,7 @@ void find() //find details
 			fscanf(fp,"%s %s %s %d",b.code,b.name,b.date,&b.cost);
 			if(strcmp(b.code,ch) == 0)
 			{	
-				//printf("%s / %s / %s / %d\n",b.code,b.name,b.date,b.cost);
+				printf("%s / %s / %s / %d\n",b.code,b.name,b.date,b.cost);
 				printf("\n Record Found\n");
 				printf("\n\t\tCode ::%s",b.code);
 				printf("\n\t\tmovie name ::%s",b.name);
@@ -226,109 +226,110 @@ void viewAll()
 	fclose(fp);
 
 }
-//for ticket booking 
 void book_ticket()
 {
- struct book b;
-	FILE *fp;
+    struct book b;
+    FILE *fp;
+    FILE *ufp;
 
-	FILE *ufp;
+    int total_seat, total_amount;
+    char name[20];
+    char mobile[20];
+    char movie_code[20]; // Code to search for the movie
+    int movie_found = 0; // Flag to check if the movie is found
 
-	int total_seat,mobile,total_amount;
-	char name[20];
+    // Display all movies for the user to choose
+    fp = fopen("data.txt", "r");
+    if (fp == NULL)
+    {
+        printf("File does not exist!\n");
+        exit(1);
+    }
 
-	
-	char ch; //used in display all movies
-	char movie_code[20]; //for searching
+    printf("\nAvailable Movies:\n");
+    printf("---------------------------------------------------\n");
+    while (fscanf(fp, "%s %s %s %d", b.code, b.name, b.date, &b.cost) != EOF)
+    {
+        printf("Code: %s, Name: %s, Date: %s, Cost: %d\n", b.code, b.name, b.date, b.cost);
+    }
+    fclose(fp);
 
-	// disply all moives by default for movie code
-	fp = fopen("data.txt","r");
-	if(fp == NULL)
-	{
-		printf("file does not found !");
-		exit(1);
+    // Get movie choice from the user
+    printf("\nEnter the movie code to book tickets: ");
+    scanf("%s", movie_code);
 
-	}
-	else
-	{	
-		system("cls");
-		while( ( ch = fgetc(fp) ) != EOF )
-      		printf("%c",ch);
-		
-	}
-	fclose(fp);
-	
-	//display ends
-	printf("\n For Book ticket Choice Movie(Enter Movie Code First Latter Of Movie)\n");
-	printf("\n Enter movie code :");
-	scanf("%s",movie_code);
-	//system("clear");
-	fp = fopen("data.txt","r");
-	if(fp == NULL)
-	{
-		printf("file does not found !");
-		exit(1);
+    // Reopen file to find the chosen movie
+    fp = fopen("data.txt", "r");
+    if (fp == NULL)
+    {
+        printf("File does not exist!\n");
+        exit(1);
+    }
 
-	}
-	else
-	{	
-		while(getc(fp) != EOF)
-		{
-			fscanf(fp,"%s %s %s %d",b.code,b.name,b.date,&b.cost);
-			if(strcmp(b.code,movie_code) == 0)
-			{	
-				//printf("%s / %s / %s / %d\n",b.code,b.name,b.date,b.cost);
-				printf("\n Record Found\n");
-				printf("\n\t\tCode ::%s",b.code);
-				printf("\n\t\tMovie name ::%s",b.name);
-				printf("\n\t\tdate name ::%s",b.date);
-				printf("\n\t\tPrice of ticket::%d",b.cost);
-			}
-		}
-		
-	}
-	printf("\n* Fill Deatails  *");
-	printf("\n your name :");
-	scanf("%s",name);
-	printf("\n mobile number :");
-	scanf("%d",&mobile);
-	printf("\n Total number of tickets :");
-	scanf("%d",&total_seat);
-	
-	
-	total_amount = b.cost * total_seat;
-	
-	printf("\n ENJOY MOVIE \n");
-	printf("\n\t\tname : %s",name);
-	printf("\n\t\tmobile Number : %d",mobile);
-	printf("\n\t\tmovie name : %s",b.name);
-	printf("\n\t\tTotal seats : %d",total_seat);
-	printf("\n\t\tcost per ticket : %d",b.cost);
-	printf("\n\t\tTotal Amount : %d",total_amount);
-	
-	
-	ufp=fopen("oldTransection.txt","a");
-	if(ufp == NULL)
-	{
-		printf("FIle not Found");
-	}
-	else
-	{
-		fprintf(ufp,"%s %d %d %d %s %d \n",name,mobile,total_seat,total_amount,b.name,b.cost);
-		printf("\n Record insert Sucessfull to the old record file");
-	}
-		printf("\n");
-	fclose(ufp);
-	fclose(fp);
+    while (fscanf(fp, "%s %s %s %d", b.code, b.name, b.date, &b.cost) != EOF)
+    {
+        if (strcmp(b.code, movie_code) == 0)
+        {
+            movie_found = 1; // Movie found
+            break;
+        }
+    }
+    fclose(fp);
 
+    if (!movie_found)
+    {
+        printf("Sorry, no movie found with code %s!\n", movie_code);
+        return;
+    }
+
+    // Display movie details
+    printf("\nMovie Details:\n");
+    printf("---------------------------------------------------\n");
+    printf("Code: %s\n", b.code);
+    printf("Name: %s\n", b.name);
+    printf("Date: %s\n", b.date);
+    printf("Ticket Price: %d\n", b.cost);
+
+    // Booking details
+    printf("\n* Fill Your Details *\n");
+    printf("Your Name: ");
+    scanf("%s", name);
+    printf("Mobile Number: ");
+    scanf("%s", mobile);
+    printf("Total Number of Tickets: ");
+    scanf("%d", &total_seat);
+
+    total_amount = b.cost * total_seat;
+
+    printf("\nEnjoy the Movie!\n");
+    printf("---------------------------------------------------\n");
+    printf("Name: %s\n", name);
+    printf("Mobile Number: %s\n", mobile);
+    printf("Movie Name: %s\n", b.name);
+    printf("Total Seats: %d\n", total_seat);
+    printf("Cost per Ticket: %d\n", b.cost);
+    printf("Total Amount: %d\n", total_amount);
+
+    // Log transaction
+    ufp = fopen("oldTransection.txt", "a");
+    if (ufp == NULL)
+    {
+        printf("File does not exist!\n");
+        exit(1);
+    }
+
+    fprintf(ufp, "%s %s %d %d %s %s %d\n", name, mobile, total_seat, total_amount, b.code, b.name, b.cost);
+    printf("\nTransaction Recorded Successfully!\n");
+    fclose(ufp);
 }
+
 //for view all user transections
 void old_record()
 {
 	char ch;
 	FILE *fp;
 
-	//system("clear");
+	system("clear");
 	
 	fp = fopen("oldTransection.txt","r");
 	if(fp == NULL)
@@ -348,5 +349,4 @@ void old_record()
 
 
 }
-
 
