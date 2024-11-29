@@ -345,7 +345,7 @@ void old_record()
       		printf("%c",ch);
 		
 	}
-	fclose(fp);
+	fclose(fp)
 
 
 }
