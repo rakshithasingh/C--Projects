@@ -1,6 +1,4 @@
-Here's a simple C program that simulates an environment pollution tracking system. This program allows users to input pollution data and view the output.
 
-```
 #include <stdio.h>
 #include <string.h>
 
